@@ -71,8 +71,15 @@ void HighScore::Update(std::string playerName, int score) {
     player.setDate(date);
 
     // Insert new highscore 
-    if (score > _playerList.front().getScore()){
-        _playerList.insert(_playerList.begin(), player);
+    if (score > _playerList.back().getScore()){
+       // _playerList.insert(_playerList.begin(), player); //feedback: use all new scores not just highscores
+	_playerList.emplace_back(player);
+	std::sort(_playerList.begin(), _playerList.end(), compare_player_by_score);
     }
-        
+    
+}
+// Compare function for std::sort 
+bool compare_player_by_score(Player player1, Player player2){
+	// return player with higher score
+    return player1.getScore() > player2.getScore();
 }

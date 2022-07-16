@@ -12,9 +12,9 @@
 #include <ctime> // for date
 #include "player.h"
 
-const int kMaxentries = 100;
+const int kMaxentries = 500;
 const std::string khighscorefile = "../highscore.txt";
-static const int print_N_highscores = 5;
+static const int print_N_highscores = 20;
 
 class HighScore{
 public:
@@ -28,6 +28,7 @@ private:
      
 };
 
+bool compare_player_by_score(Player player1, Player player2);
 
 
 
