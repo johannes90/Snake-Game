@@ -18,7 +18,8 @@ class Game {
 
  private:
   Snake snake;
-  SDL_Point food;
+  SDL_Point food, extraFood; //extra food added
+  bool hasExtraFood;
 
   std::random_device dev;
   std::mt19937 engine;
@@ -28,6 +29,7 @@ class Game {
   int score{0};
 
   void PlaceFood();
+  void PlaceExtraFood(); //extra food
   void Update();
 };
 

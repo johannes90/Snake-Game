@@ -25,7 +25,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake);
     Update();
-    renderer.Render(snake, food);
+    renderer.Render(snake, food, extraFood, hasExtraFood); //extra food
 
     frame_end = SDL_GetTicks();
 
@@ -60,7 +60,29 @@ void Game::PlaceFood() {
     if (!snake.SnakeCell(x, y)) {
       food.x = x;
       food.y = y;
-      return;
+      break;
+    }
+  }
+//extra food
+  hasExtraFood = false;
+
+  if(snake.size % 5 == 0){
+    PlaceExtraFood();
+  }
+}
+
+void Game::PlaceExtraFood(){
+  int x, y;
+  hasExtraFood = true;
+  while (true) {
+    x = random_w(engine);
+    y = random_h(engine);
+    // Check that the location is not occupied by a snake item before placing
+    // food.
+    if (!snake.SnakeCell(x, y)) {
+      extraFood.x = x;
+      extraFood.y = y;
+      break;
     }
   }
 }
@@ -81,6 +103,15 @@ void Game::Update() {
     snake.GrowBody();
     snake.speed += 0.02;
   }
+
+  if (extraFood.x == new_x && extraFood.y == new_y && hasExtraFood) {
+    score+=5;
+    snake.GrowBody();
+    snake.speed += 0.02;
+    hasExtraFood = false;
+  }
+
+
 }
 
 int Game::GetScore() const { return score; }

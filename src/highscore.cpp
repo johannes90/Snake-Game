@@ -78,7 +78,7 @@ void HighScore::Update(std::string playerName, int score) {
     }
     
 }
-// Compare function for std::sort 
+// Compare function for std::sort -> return object that is sorted "higher"
 bool compare_player_by_score(Player player1, Player player2){
 	// return player with higher score
     return player1.getScore() > player2.getScore();
