@@ -19,6 +19,7 @@ void Snake::Update() {
   }
 }
 
+
 void Snake::UpdateHead() {
   switch (direction) {
     case Direction::kUp:
